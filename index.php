@@ -1,3 +1,8 @@
 <?php include_once 'component\header.php';
 
-echo "reussi";
+
+use App\Service\PDOService;
+
+$database = new PDOService();
+
+dump($database->allMovie());

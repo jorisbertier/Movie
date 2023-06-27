@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Datetime;
+use App\Models\Actor;
 
 class Movie 
 {
     private string $title;
     private Datetime $releaseDate;
+    private array $actors = [];
 
 
     public function getTitle() : string
@@ -30,4 +32,16 @@ class Movie
         $this->releaseDate = $releaseDate;
     }
 
+    public function addActor(Actor $actor) : void
+    {
+        $this->actors[] = $actor;
+    }
+
+    public function removeActor(Actor $actor)
+    {
+        // if(array_search($actor, $this->actors) == true){
+        unset($this->actors, $actor);
+        // }
+
+    }
 }

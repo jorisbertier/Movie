@@ -39,15 +39,27 @@ class PDOService
         return $this->password;
     }
 
-    public function allMovie() : object
+    public function fetchMovies(string $string)
     {
-        return $this->pdo->query('SELECT * FROM movie')->fetchObject();
+        return $this->pdo->query($string)->fetchAll(PDO::FETCH_CLASS, Movie::class);
     }
 
+    public function allMovie() : object
+    {
+        
+        return $this->pdo->query('SELECT * FROM movie')->fetchObject();
+    }
 
     public function findAll() 
     {
         $query = $this->pdo->query('SELECT * FROM movie');
         return $query->fetchObject(Movie::class);
     }
+     
+    public function newAll() 
+    {
+        $query = $this->pdo->query('SELECT * FROM movie');
+        return $query->fetchAll(PDO::FETCH_CLASS, Movie::class);
+    }
+    
 }

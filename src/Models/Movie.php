@@ -17,6 +17,11 @@ class Movie
         return $this->id;
     }
 
+    public function setId(int $id) : void 
+    {
+        $this->id = $id;
+    }
+
     public function getTitle() : string
     {
         return $this->title;
@@ -30,6 +35,11 @@ class Movie
     public function getReleaseDate() : Datetime
     {
         return $this->releaseDate;
+    }
+
+    public function getActors() : array
+    {
+        return $this->actors;
     }
 
     public function setReleaseDate(Datetime $releaseDate) : void
@@ -51,4 +61,5 @@ class Movie
             unset($this->actors[$key]);
         }
     }
+
 }

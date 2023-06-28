@@ -59,6 +59,44 @@ class MovieRepository
             $query->bindParam(':releaseDate', $releaseDateFormat);
             $query->execute();
             return $movie;
-        
     }
+    
+    //  Pas la bonne méthode
+    // public function addActorAndMovie(Movie $movie, Actor $actor) : object
+    // {
+    //         $query = $this->PDOService->getPDO()->prepare('INSERT INTO movie_actor VALUE (null, :title,:actor)');
+    //         $movie = $movie->getId();
+    //         $actor = $actor->getId();
+    //         $query->bindParam(':movie', $movie);
+    //         $query->bindParam(':releaseDate', $actor);
+    //         $query->execute();
+    //         return $movie;
+    // }
+
+    public function addActorAndMovie(Movie $movie)
+    {
+        $actor = $movie->getActors();
+        foreach($actor as $item) 
+        {
+            dump($item);
+            dump($movie);
+            $query = $this->PDOService->getPDO()->prepare('INSERT INTO movie_actor VALUE (null, :idActor,:idFilm)');
+            $idActor = $actor->getId();
+            $idFilm = $movie->getId();
+            $query->bindParam(':idActor', $idActor);
+            $query->bindParam(':idFilm', $idFilm);
+            $query->execute();
+        }
+        return movie;
+        // dump($movie->getId());
+
+        // $query = $this->PDOService->getPDO()->prepare('INSERT INTO actor VALUE (null, :firstName,:lastName)');
+        // $firstName = $actor->getFirstName();
+        // $lastName = $actor->getLastName();
+        // $query->bindParam(':firstName', $firstName);
+        // $query->bindParam(':lastName', $lastName);
+        // $query->execute();
+        // return $actor; ,, 
+    }
+
 }

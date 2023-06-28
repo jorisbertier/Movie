@@ -8,27 +8,36 @@ use App\Repository\MovieRepository;
 use App\Repository\ActorRepository;
 
 $database = new PDOService();
-$test = new MovieRepository();
-$yo = new ActorRepository();
-$yo->findAllActorsToModel();
-// dump($yo);
-// dump($test);
+$movie = new MovieRepository();
+$actor = new ActorRepository();
+$actor->findAllActorsToModel();
+// dump($actor);
+// dump($movie);
 
 
 $film = new Movie();
 $brad = new Actor();
+$pamela = new Actor();
 $brad->setFirstName('jean');
-
 $brad->setLastName('dujardin');
-$film->addActor($brad);
+$pamela->setFirstName('pamela');
+$pamela->setLastName('anderson');
+$pamela->setId(15);
+
 // dump($film);
 $film->removeActor($brad);
 $film->removeActor($brad);
 $film->setTitle('Seigneur des anneaux');
+$film->setId(30);
 
 $releaseDate = DateTime::createFromFormat('Y-m-d', '2000-01-01');
 $film->setReleaseDate($releaseDate);
 
-$test->addMovieDatabase($film);
+// $film->addActor($brad);
+$film->addActor($pamela);
 
-// $yo->addActorDatabase($brad);
+$movie->addActorAndMovie($film);
+
+
+// $movie->addMovieDatabase($film);
+// $actor->addActorDatabase($brad);

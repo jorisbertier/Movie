@@ -13,6 +13,11 @@ class Actor
         return $this->id;
     }
 
+    public function setId(int $id) : void 
+    {
+        $this->id = $id;
+    }
+    
     public function getFirstName() : string
     {
         return $this->firstname;

@@ -17,7 +17,7 @@ $actorRepository = new ActorRepository();
 
 // $movie = $movieRepository->findById(4);
 
-// $actor1 = $actorRepository->findById(3);
+$actor1 = $actorRepository->findById(3);
 // $actor2 = $actorRepository->findById(2);
 
 // $movie->addActor($actor1);
@@ -25,3 +25,4 @@ $actorRepository = new ActorRepository();
 
 // $movieRepository->addActorAndMovie($movie);
 
+$actorRepository->removeActor($actor1);

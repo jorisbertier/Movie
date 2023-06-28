@@ -50,4 +50,13 @@ class ActorRepository
         $query->execute();
         return $actor;
     }
+
+    public function removeActor(Actor $actor)
+    {
+        $query = $this->PDOService->getPDO()->prepare('DELETE FROM actor WHERE id = :idActor');
+        $idActor = $actor->getId();
+        $query->bindParam(':idActor', $idActor);
+        $query->execute();
+        return $actor;
+    }
 }

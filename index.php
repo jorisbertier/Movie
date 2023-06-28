@@ -10,7 +10,7 @@ use App\Repository\ActorRepository;
 $database = new PDOService();
 $test = new MovieRepository();
 $yo = new ActorRepository();
-dump($yo->findAllActorsToModel());
+$yo->findAllActorsToModel();
 dump($yo);
 dump($test);
 
@@ -21,12 +21,12 @@ $brad->setFirstName('jean');
 
 $brad->setLastName('dujardin');
 $film->addActor($brad);
-dump($film);
+// dump($film);
 $film->removeActor($brad);
 $film->removeActor($brad);
-dump($film);
-
-
+// dump($film);
+$ee = "ee";
+dump($test->findByTitle('a'));
 
 
 

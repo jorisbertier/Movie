@@ -7,10 +7,15 @@ use App\Models\Actor;
 
 class Movie 
 {
+    private int $id;
     private string $title;
     private Datetime $releaseDate;
     private array $actors = [];
 
+    public function getId() : int
+    {
+        return $this->id;
+    }
 
     public function getTitle() : string
     {

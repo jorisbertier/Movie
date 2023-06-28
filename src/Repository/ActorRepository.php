@@ -37,8 +37,6 @@ class ActorRepository
         $query = $this->PDOService->getPDO()->prepare('SELECT * FROM actor WHERE id = ?');
         $query->bindValue(1, $id);
         $query->execute();
-        return $query->fetchObject(MovActorie::class);
-
+        return $query->fetchObject(Actor::class);
     }
-
 }

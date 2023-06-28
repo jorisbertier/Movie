@@ -9,6 +9,10 @@ use App\Repository\ActorRepository;
 
 $database = new PDOService();
 $test = new MovieRepository();
+$yo = new ActorRepository();
+dump($yo->findAllActorsToModel());
+dump($yo);
+dump($test);
 
 
 $film = new Movie();

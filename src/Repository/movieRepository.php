@@ -81,13 +81,13 @@ class MovieRepository
             dump($item);
             dump($movie);
             $query = $this->PDOService->getPDO()->prepare('INSERT INTO movie_actor VALUE (null, :idActor,:idFilm)');
-            $idActor = $actor->getId();
+            $idActor = $item->getId();
             $idFilm = $movie->getId();
             $query->bindParam(':idActor', $idActor);
             $query->bindParam(':idFilm', $idFilm);
             $query->execute();
         }
-        return movie;
+        return $movie;
         // dump($movie->getId());
 
         // $query = $this->PDOService->getPDO()->prepare('INSERT INTO actor VALUE (null, :firstName,:lastName)');
@@ -97,6 +97,15 @@ class MovieRepository
         // $query->bindParam(':lastName', $lastName);
         // $query->execute();
         // return $actor; ,, 
+    }
+
+    public function removeMovie(Movie $movie)
+    {
+        $query = $this->PDOService->getPDO()->prepare('DELETE FROM movie WHERE id = :idMovie');
+        $idMovie = $movie->getId();
+        $query->bindParam(':idMovie', $idMovie);
+        $query->execute();
+        return $movie;
     }
 
 }

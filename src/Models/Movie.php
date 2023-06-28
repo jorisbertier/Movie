@@ -61,5 +61,4 @@ class Movie
             unset($this->actors[$key]);
         }
     }
-
 }

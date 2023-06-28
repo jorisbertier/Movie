@@ -51,14 +51,14 @@ class MovieRepository
 
     public function addMovieDatabase(Movie $movie) : Movie
     {
+            $query = $this->PDOService->getPDO()->prepare('INSERT INTO movie VALUE (null, :title,:releaseDate)');
+            $title = $movie->getTitle();
+            $releaseDate = $movie->getReleaseDate();
+            $releaseDateFormat = $releaseDate->format('Y-m-d');
+            $query->bindParam(':title', $title);
+            $query->bindParam(':releaseDate', $releaseDateFormat);
+            $query->execute();
+            return $movie;
         
-        $query = $this->PDOService->getPDO()->prepare('INSERT INTO movie VALUE (null, :title,:releaseDate)');
-        $title = $movie->getTitle();
-        $releaseDate = $movie->getReleaseDate();
-        $releaseDateFormat = $releaseDate->format('Y-m-d');
-        $query->bindParam(':title', $title);
-        $query->bindParam(':releaseDate', $releaseDateFormat);
-        $query->execute();
-        return $movie;
     }
 }

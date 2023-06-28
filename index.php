@@ -29,6 +29,6 @@ $film->setTitle('Seigneur des anneaux');
 $releaseDate = DateTime::createFromFormat('Y-m-d', '2000-01-01');
 $film->setReleaseDate($releaseDate);
 
-// $test->addMovieDatabase($film);
+$test->addMovieDatabase($film);
 
-$yo->addActorDatabase($brad);
+// $yo->addActorDatabase($brad);

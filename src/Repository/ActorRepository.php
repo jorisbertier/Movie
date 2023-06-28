@@ -39,4 +39,15 @@ class ActorRepository
         $query->execute();
         return $query->fetchObject(Actor::class);
     }
+
+    public function addActorDatabase(Actor $actor) : Actor 
+    {
+        $query = $this->PDOService->getPDO()->prepare('INSERT INTO actor VALUE (null, :firstName,:lastName)');
+        $firstName = $actor->getFirstName();
+        $lastName = $actor->getLastName();
+        $query->bindParam(':firstName', $firstName);
+        $query->bindParam(':lastName', $lastName);
+        $query->execute();
+        return $actor;
+    }
 }

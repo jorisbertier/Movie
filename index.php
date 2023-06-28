@@ -11,8 +11,8 @@ $database = new PDOService();
 $test = new MovieRepository();
 $yo = new ActorRepository();
 $yo->findAllActorsToModel();
-dump($yo);
-dump($test);
+// dump($yo);
+// dump($test);
 
 
 $film = new Movie();
@@ -24,14 +24,11 @@ $film->addActor($brad);
 // dump($film);
 $film->removeActor($brad);
 $film->removeActor($brad);
-// dump($film);
-$ee = "ee";
-dump($test->findByTitle('a'));
+$film->setTitle('Seigneur des anneaux');
 
+$releaseDate = DateTime::createFromFormat('Y-m-d', '2000-01-01');
+$film->setReleaseDate($releaseDate);
 
+// $test->addMovieDatabase($film);
 
-dump($test->findById(100));
-dump($database->fetchMovies('SELECT * FROM movie'));
-// dump($database->allMovie());
-dump($database->findAll());
-dump($database->newAll());
+$yo->addActorDatabase($brad);

@@ -45,8 +45,10 @@ class Movie
     public function removeActor(Actor $actor)
     {
         // if(array_search($actor, $this->actors) == true){
-        unset($this->actors, $actor);
+        // unset($this->actors, $actor);
         // }
-
+        if(($key = array_search($actor, $this->actors)) !== false){
+            unset($this->actors[$key]);
+        }
     }
 }

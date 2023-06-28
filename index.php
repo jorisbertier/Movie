@@ -15,12 +15,13 @@ $database = new PDOService();
 $movieRepository = new MovieRepository();
 $actorRepository = new ActorRepository();
 
-$movie = $movieRepository->findById(4);
+// $movie = $movieRepository->findById(4);
 
-$actor1 = $actorRepository->findById(3);
-$actor2 = $actorRepository->findById(2);
+// $actor1 = $actorRepository->findById(3);
+// $actor2 = $actorRepository->findById(2);
 
-$movie->addActor($actor1);
-$movie->addActor($actor2);
+// $movie->addActor($actor1);
+// $movie->addActor($actor2);
 
-$movieRepository->addActorAndMovie($movie);
+// $movieRepository->addActorAndMovie($movie);
+

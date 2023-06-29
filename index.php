@@ -15,14 +15,12 @@ $database = new PDOService();
 $movieRepository = new MovieRepository();
 $actorRepository = new ActorRepository();
 
+$troiscent = $movieRepository->findById(1);
 
-$jean = $actorRepository->findById(7);
+dump($troiscent);
 
+$troiscent->setTitle(400);
+$releaseDate = DateTime::createFromFormat('Y-m-d', '2001-01-01');
+$troiscent->setReleaseDate($releaseDate);
 
-
-$jean->setFirstName('Marion');
-$jean->setLastName('Cotillard');
-
-$actorRepository->updateActor($jean);
-
-dump($jean);
+$movieRepository->updateMovie($troiscent);

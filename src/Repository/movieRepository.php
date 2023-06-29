@@ -24,7 +24,7 @@ class MovieRepository
 
     public function findFirstMovieToModel():Movie
     {
-        return $this->PDOService->getPDO()->query($this->queryAll)->fetchObject(Movie::class);
+        return $this->PDOService->getPDO()->query($this->queryAll)->fetch(PDO::FETCH_CLASS, Movie::class);
     }
 
     public function findAllMoviesToModel():array
@@ -104,6 +104,20 @@ class MovieRepository
         $query = $this->PDOService->getPDO()->prepare('DELETE FROM movie WHERE id = :idMovie');
         $idMovie = $movie->getId();
         $query->bindParam(':idMovie', $idMovie);
+        $query->execute();
+        return $movie;
+    }
+
+    public function updateMovie(Movie $movie) : Movie 
+    {
+        $query = $this->PDOService->getPDO()->prepare('UPDATE movie SET title = :title , release_date = :releaseDate WHERE id = :idMovie');
+        $idMovie = $movie->getId();
+        $title = $movie->getTitle();
+        $releaseDate = $movie->getReleaseDate();
+        $releaseDateFormat = $releaseDate->format('Y-m-d');
+        $query->bindParam(':idMovie', $idMovie);
+        $query->bindParam(':title', $title);
+        $query->bindParam(':releaseDate', $releaseDateFormat);
         $query->execute();
         return $movie;
     }

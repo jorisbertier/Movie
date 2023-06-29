@@ -24,7 +24,7 @@ class ActorRepository
 
     public function findFirstActorToModel():Actor
     {
-        return $this->PDOService->getPDO()->query($this->queryAll)->fetchObject(Actor::class);
+        return $this->PDOService->getPDO()->query($this->queryAll)->fetch(PDO::FETCH_CLASS, Actor::class);
     }
 
     public function findAllActorsToModel():array

@@ -59,4 +59,18 @@ class ActorRepository
         $query->execute();
         return $actor;
     }
+
+    public function updateActor(Actor $actor) : Actor
+    {
+        $query = $this->PDOService->getPDO()->prepare('UPDATE actor SET first_name= :firstName , last_name = :lastName WHERE id = :idActor');
+        $idActor = $actor->getId();
+        $firstName= $actor->getFirstName();
+        $lastName = $actor->getLastName();
+
+        $query->bindParam(':idActor', $idActor);
+        $query->bindParam(':firstName', $firstName);
+        $query->bindParam(':lastName', $lastName);
+        $query->execute();
+        return $actor;
+    }
 }

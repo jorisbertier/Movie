@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 28 juin 2023 à 07:15
+-- Généré le : ven. 30 juin 2023 à 12:46
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `actor` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
   UNIQUE KEY `first_name` (`first_name`,`last_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `actor`
@@ -44,9 +44,9 @@ CREATE TABLE IF NOT EXISTS `actor` (
 INSERT INTO `actor` (`id`, `first_name`, `last_name`) VALUES
 (2, 'Angelina', 'Jolie'),
 (1, 'Brad', 'Pitt'),
-(3, 'Dwyane', 'Johnson'),
 (4, 'Johnny', 'Depp'),
 (5, 'Leonardo', 'Di Caprio'),
+(7, 'Marion', 'Cotillard'),
 (6, 'Will', 'Smith');
 
 -- --------------------------------------------------------
@@ -61,26 +61,26 @@ CREATE TABLE IF NOT EXISTS `movie` (
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `release_date` date NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `title` (`title`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `movie`
 --
 
 INSERT INTO `movie` (`id`, `title`, `release_date`) VALUES
-(1, '300', '2000-01-01'),
+(1, '400', '2001-01-01'),
 (2, 'Les justiciers', '2003-01-01'),
-(3, 'Spider-man No way', '2005-01-01'),
 (4, 'Black clover La renaissance', '1998-01-01'),
-(5, 'Transformers 1', '2010-01-01'),
 (6, 'Transformers 2', '1980-01-01'),
 (7, 'Harry potter à lécole des sorciers', '1986-01-01'),
 (8, 'Le roi Lion', '2010-01-01'),
 (9, 'Inception', '2004-01-01'),
 (10, 'Babilon', '2012-01-01'),
 (11, 'Insterstallar', '2013-01-01'),
-(12, 'Lala land', '2014-01-01');
+(12, 'Lala land', '2014-01-01'),
+(20, 'Seigneur des anneaux', '2000-01-01');
 
 -- --------------------------------------------------------
 
@@ -94,9 +94,9 @@ CREATE TABLE IF NOT EXISTS `movie_actor` (
   `id_actor` int NOT NULL,
   `id_movie` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `id_actor` (`id_actor`),
-  KEY `id_movie` (`id_movie`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `movie_actor_ibfk_1` (`id_actor`),
+  KEY `movie_actor_ibfk_2` (`id_movie`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `movie_actor`
@@ -105,13 +105,12 @@ CREATE TABLE IF NOT EXISTS `movie_actor` (
 INSERT INTO `movie_actor` (`id`, `id_actor`, `id_movie`) VALUES
 (1, 1, 1),
 (2, 2, 1),
-(3, 3, 2),
-(4, 4, 3),
 (5, 5, 4),
 (6, 1, 4),
 (7, 1, 6),
 (8, 1, 7),
-(9, 1, 8);
+(9, 1, 8),
+(12, 2, 4);
 
 --
 -- Contraintes pour les tables déchargées
@@ -121,8 +120,8 @@ INSERT INTO `movie_actor` (`id`, `id_actor`, `id_movie`) VALUES
 -- Contraintes pour la table `movie_actor`
 --
 ALTER TABLE `movie_actor`
-  ADD CONSTRAINT `movie_actor_ibfk_1` FOREIGN KEY (`id_actor`) REFERENCES `actor` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `movie_actor_ibfk_2` FOREIGN KEY (`id_movie`) REFERENCES `movie` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `movie_actor_ibfk_1` FOREIGN KEY (`id_actor`) REFERENCES `actor` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  ADD CONSTRAINT `movie_actor_ibfk_2` FOREIGN KEY (`id_movie`) REFERENCES `movie` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

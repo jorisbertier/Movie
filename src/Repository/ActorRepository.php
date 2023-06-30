@@ -16,7 +16,6 @@ class ActorRepository
         $this->PDOService = new PDOService();
     }
 
-
     public function findAll():array
     {
         return $this->PDOService->getPDO()->query($this->queryAll)->fetchAll();
@@ -24,7 +23,7 @@ class ActorRepository
 
     public function findFirstActorToModel():Actor
     {
-        return $this->PDOService->getPDO()->query($this->queryAll)->fetch(PDO::FETCH_CLASS, Actor::class);
+        return $this->PDOService->getPDO()->query($this->queryAll)->fetchObject(Actor::class);
     }
 
     public function findAllActorsToModel():array
@@ -38,6 +37,10 @@ class ActorRepository
         $query->bindValue(1, $id);
         $query->execute();
         return $query->fetchObject(Actor::class);
+        // $query = $this->PDOService->getPDO()->prepare('SELECT id, first_name, last_name FROM actor WHERE id = :id');
+        // $query->bindParam(':id',$id);
+        // $query->execute();
+        // return $query->fetchObject();
     }
 
     public function addActorDatabase(Actor $actor) : Actor 
@@ -73,4 +76,13 @@ class ActorRepository
         $query->execute();
         return $actor;
     }
+
+    // public function convertDataToObject(Object $dataBaseObject) : Actor
+    // {
+    //     $actor= new Actor();
+    //     $actor->setId($dataBaseObject->id);
+    //     $actor->setFirstName($dataBaseObject->firstname);
+    //     $actor->setLastName($dataBaseObject->lastname);
+    //     return $actor;
+    // }
 }
